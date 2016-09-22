@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.up.sim.clientview.RSAController">
+   <children>
+      <SplitPane dividerPositions="0.11055276381909548" layoutX="148.0" layoutY="22.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <HBox alignment="CENTER_LEFT" layoutX="-35.0" layoutY="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="43.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ComboBox fx:id="comboBox_encoding" layoutX="-35.0" layoutY="1.0" prefWidth="100.0" promptText="编码方式" HBox.hgrow="NEVER" />
+                        <Button fx:id="btn_clear" layoutX="207.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClear" prefWidth="50.0" text="清空" HBox.hgrow="NEVER" />
+                        <Rectangle fill="#9d9d9d" height="33.0" stroke="#9d9d9d" strokeType="INSIDE" width="4.0" />
+                        <Button fx:id="btn_genKeyPair" mnemonicParsing="false" onAction="#onGenerateKeyPair" text="随机生成公私钥">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></Button>
+                        <ComboBox fx:id="combox_keySize" prefWidth="80.0" />
+                        <Rectangle fill="#9d9d9d" height="33.0" stroke="#9d9d9d" strokeType="INSIDE" width="4.0" />
+                        <Button fx:id="btn_saveKeys" mnemonicParsing="false" onAction="#onSaveKeys" text="保存秘钥" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0">
+               <children>
+                  <GridPane prefHeight="350.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="20.0" valignment="CENTER" vgrow="NEVER" />
+                      <RowConstraints minHeight="-Infinity" percentHeight="80.0" prefHeight="205.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+                  <SplitPane dividerPositions="0.2" orientation="VERTICAL" prefHeight="350.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="698.0" SplitPane.resizableWithParent="false">
+                           <children>
+                              <GridPane alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="337.0" minWidth="10.0" prefWidth="83.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="549.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="35.0" vgrow="ALWAYS" />
+                                  <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="35.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER" text="公钥">
+                                       <GridPane.margin>
+                                          <Insets left="-10.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" text="私钥" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="-10.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <TextField fx:id="t_publicKey" promptText="PEM文件中BASE64部分, 去除首尾行和换行符" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="44.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <TextField fx:id="t_privateKey" promptText="PEM文件中BASE64部分, 去除首尾行和换行符" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="44.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                       <children>
+                                          <RadioButton fx:id="radioButton_encodeByPrivate" mnemonicParsing="false" text="私钥加密, 公钥解密" GridPane.columnIndex="1" GridPane.rowIndex="2" HBox.hgrow="NEVER" />
+                                          <RadioButton fx:id="radioButton_encodeByPublic" mnemonicParsing="false" text="公钥加密, 私钥解密" GridPane.columnIndex="1" GridPane.rowIndex="2" HBox.hgrow="NEVER" />
+                                       </children>
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </HBox>
+                                    <Label alignment="CENTER" text="模式" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="-10.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Button fx:id="btn_loadPublicKey" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onPublicKeyFileChooser" text="..." GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets right="15.0" />
+                                       </GridPane.margin>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Button>
+                                    <Button fx:id="btn_loadPrivateKey" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onPrivateKeyFileChooser" text="..." GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets right="15.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+                           <children>
+                              <GridPane minHeight="-Infinity" prefHeight="274.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" />
+                                    <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" percentWidth="20.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox alignment="CENTER" prefWidth="122.0" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                                       <children>
+                                          <Button fx:id="btn_encode" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEncode" prefWidth="103.0" text="加密&gt;" GridPane.columnIndex="1" VBox.vgrow="NEVER" />
+                                          <Button fx:id="btn_decode" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDecode" prefWidth="103.0" text="&lt;解密" GridPane.columnIndex="1" VBox.vgrow="NEVER" />
+                                       </children>
+                                    </VBox>
+                                    <TextArea fx:id="t_left" prefWidth="200.0" promptText="明文(不超过117字节)" />
+                                    <TextArea fx:id="t_right" prefWidth="200.0" promptText="密文(不超过128字节)" GridPane.columnIndex="2" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
