@@ -22,7 +22,9 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -286,15 +288,23 @@ public class RSAController implements Initializable {
             return;
         }
 
-
-        if (lastDirectoryPath == null) {
-            lastDirectoryPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        if (StringUtils.isEmpty(lastDirectoryPath)) {
+            String path = "";
+            try {
+                path = RSAController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+                path = URLDecoder.decode(path, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                logger.error("初始化目录失败", e);
+            }
+            lastDirectoryPath = FilenameUtils.getPath(path);
         }
+
+        logger.info(lastDirectoryPath);
 
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("选择公私钥存放路径");
-        File defaultDirectory = new File(lastDirectoryPath);
-        chooser.setInitialDirectory(defaultDirectory);
+//        File defaultDirectory = new File(lastDirectoryPath);
+//        chooser.setInitialDirectory(defaultDirectory);
         File selectedDirectory = chooser.showDialog(new Stage());
 
         if (selectedDirectory == null) {
