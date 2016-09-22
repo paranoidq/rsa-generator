@@ -282,7 +282,7 @@ public class RSAController implements Initializable {
         String publicText = t_publicKey.getText().trim();
 
         if (StringUtils.isEmpty(privateText) || StringUtils.isEmpty(publicText)) {
-            DialogUtil.showErrorAlert("错误", "公私钥为空!请输入或生成公私钥");
+            DialogUtil.showErrorAlert("错误", "公私钥为空! 请输入或生成公私钥");
             return;
         }
 
